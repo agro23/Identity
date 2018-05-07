@@ -27,6 +27,11 @@ namespace Identity.Controllers
             return View();
         }
 
+        public IActionResult HelloAjax()
+        {
+            return Content("Hello from the controller!", "text/plain");
+        }
+
         public IActionResult Error()
         {
             return View();

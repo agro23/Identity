@@ -10,13 +10,18 @@ namespace Identity.Models
     [Table("BlogPosts")]
     public class BlogPost
     {
+
+        public BlogPost()
+        {
+            this.Comments = new HashSet<Comment>();
+        }
+
         [Key]
         public int BlogPostId { get; set; }
         public string Title { get; set; }
         public string Content { get; set; }
-
         public virtual ApplicationUser ApplicationUser { get; set; }
-        public virtual Comment Comment { get; set; }
+        public virtual ICollection<Comment> Comments { get; set; }
 
         public override bool Equals(System.Object otherBlogPost)
         {

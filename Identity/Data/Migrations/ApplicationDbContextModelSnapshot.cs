@@ -72,8 +72,6 @@ namespace Identity.Data.Migrations
 
                     b.Property<string>("ApplicationUserId");
 
-                    b.Property<int?>("CommentId");
-
                     b.Property<string>("Content");
 
                     b.Property<string>("Title");
@@ -81,8 +79,6 @@ namespace Identity.Data.Migrations
                     b.HasKey("BlogPostId");
 
                     b.HasIndex("ApplicationUserId");
-
-                    b.HasIndex("CommentId");
 
                     b.ToTable("BlogPosts");
                 });
@@ -92,7 +88,7 @@ namespace Identity.Data.Migrations
                     b.Property<int>("CommentId")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("ApplicationUserId");
+                    b.Property<int>("BlogPostId");
 
                     b.Property<string>("Content")
                         .HasMaxLength(255);
@@ -101,7 +97,7 @@ namespace Identity.Data.Migrations
 
                     b.HasKey("CommentId");
 
-                    b.HasIndex("ApplicationUserId");
+                    b.HasIndex("BlogPostId");
 
                     b.ToTable("Comments");
                 });
@@ -218,17 +214,14 @@ namespace Identity.Data.Migrations
                     b.HasOne("Identity.Models.ApplicationUser", "ApplicationUser")
                         .WithMany()
                         .HasForeignKey("ApplicationUserId");
-
-                    b.HasOne("Identity.Models.Comment", "Comment")
-                        .WithMany()
-                        .HasForeignKey("CommentId");
                 });
 
             modelBuilder.Entity("Identity.Models.Comment", b =>
                 {
-                    b.HasOne("Identity.Models.ApplicationUser", "ApplicationUser")
-                        .WithMany()
-                        .HasForeignKey("ApplicationUserId");
+                    b.HasOne("Identity.Models.BlogPost", "BlogPost")
+                        .WithMany("Comments")
+                        .HasForeignKey("BlogPostId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim<string>", b =>

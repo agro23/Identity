@@ -32,6 +32,11 @@ namespace Identity.Controllers
             return Content("Hello from the controller!", "text/plain");
         }
 
+        public IActionResult OffWeGo()
+        {
+            return View("../BlogPost/Index");
+        }
+
         public IActionResult Error()
         {
             return View();

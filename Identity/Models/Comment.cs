@@ -18,7 +18,9 @@ namespace Identity.Models
         public string Content { get; set; }
 
         public int UserId { get; set; }
-        public virtual ApplicationUser ApplicationUser { get; set; }
+        public int BlogPostId { get; set; }
+        //public virtual ApplicationUser ApplicationUser { get; set; }
+        public virtual BlogPost BlogPost { get; set; }
     }
 }
 
